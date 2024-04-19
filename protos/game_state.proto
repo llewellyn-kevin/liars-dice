@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option go_package = "/game";
+
+import "protos/player_actions.proto";
+
+message Hand {
+    repeated int32 values = 1;
+}
+
+message Player {
+    string id = 1;
+    int32 score = 2;
+    oneof state {
+        BidderState bidder = 3;
+        ChallengerState challenger = 4;
+    }
+}
+
+message BidderState {
+    Player self = 1;
+    Player oppoonent = 2;
+    Hand current_hand = 3;
+    optional BidData current_bid = 4;
+    optional BidData last_bid = 5;
+    repeated PlayerAction valid_actions = 6;
+}
+
+message ChallengerState {
+    Player self = 1;
+    Player oppoonent = 2;
+    optional BidData current_bid = 3;
+    repeated PlayerAction valid_actions = 4;
+}
+
+enum ActionState {
+    BIDDING = 0;
+    BIDDING_AFTER_REROLL = 1;
+    CHALLENGING = 2;
+    GAME_OVER = 3;
+}
+
+message GameState {
+    Player player_one = 1;
+    Player player_two = 2;
+    string bidder_id = 3;
+    string challenger_id = 4;
+    Hand current_hand = 5;
+    optional BidData current_bid = 6;
+    optional BidData last_bid = 7;
+    ActionState current_action_state = 8;
+    optional string winner = 9;
+}

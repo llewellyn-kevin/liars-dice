@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option go_package = "/game";
+
+enum PlayerAction {
+    REROLL = 0;
+    BID = 1;
+    CALL = 2;
+    STAY = 3;
+}
+
+enum ValidBid {
+    SINGLE = 0;
+    ONE_PAIR = 1;
+    TWO_PAIR = 2;
+    THREE_OF_A_KIND = 3;
+    LOW_STRAIGHT = 4;
+    HIGH_STRAIGHT = 5;
+    FULL_HOUSE = 6;
+    FOUR_OF_A_KIND = 7;
+    FIVE_OF_A_KIND = 8;
+}
+
+message Action {
+    string player_id = 1;
+    PlayerAction action = 2;
+    oneof data {
+        RerollData reroll = 3;
+        BidData bid = 4;
+        Empty call = 5;
+        Empty stay = 6;
+    }
+}
+
+message RerollData {
+    repeated int32 offsets = 1;
+}
+
+message BidData {
+    ValidBid bid = 1;
+    int32 wager = 2;
+}
+
+message Empty {}
