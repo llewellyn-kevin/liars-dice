@@ -145,14 +145,9 @@ func doChallenge(g *GameState, accuse bool) {
 	}
 
 	g.CurrentActionState = ActionState_BIDDING
-	// Swap bidder and challenger
-	var temp string = g.BidderId
-	g.BidderId = g.ChallengerId
-	g.ChallengerId = temp
-	// Get new hand
+    g.swapPlayerRoles()
 	fullReroll := RerollData{Offsets: []int32{0, 1, 2, 3, 4}}
 	newHand(g, &fullReroll)
-	// Store bid from last round unless it was challenged
 	g.LastBid = g.CurrentBid
 	g.CurrentBid = nil
 }
@@ -160,6 +155,15 @@ func doChallenge(g *GameState, accuse bool) {
 //------------------------------------------------------------------------------
 // Player Utilities
 //------------------------------------------------------------------------------
+
+func (g *GameState) swapPlayerRoles() {
+    bidder, challenger := g.getBidder(), g.getChallenger()
+	var temp string = g.BidderId
+	g.BidderId = g.ChallengerId
+	g.ChallengerId = temp
+    bidder.State = &Player_Challenger{}
+    challenger.State = &Player_Bidder{}
+}
 
 func getPlayerRoleAsString(p *Player) (string, error) {
 	switch x := p.GetState().(type) {
