@@ -84,13 +84,23 @@ func main() {
 	annaBid := &game.Action_Bid{
 		Bid: &game.BidData{
 			Bid:   game.ValidBid_FIVE_OF_A_KIND,
-			Wager: 40,
+			Wager: 10,
 		},
 	}
 	if err := game.TakeAction(instance, &game.Action{
 		PlayerId: "anna",
 		Action:   game.PlayerAction_BID,
 		Data:     annaBid,
+	}); err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(fmt.Sprintf("%v", instance))
+
+    fmt.Println("---Kevin Challenge---")
+	if err := game.TakeAction(instance, &game.Action{
+		PlayerId: "kevin",
+		Action:   game.PlayerAction_CALL,
+		Data:     nil,
 	}); err != nil {
 		fmt.Println(err)
 	}
