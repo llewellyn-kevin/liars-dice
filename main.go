@@ -4,9 +4,18 @@ import (
 	"fmt"
 
 	"llewellyn.dev/liars_dice/game"
+	"llewellyn.dev/liars_dice/server"
 )
 
 func main() {
+    run()
+}
+
+func run() {
+    server.Run()
+}
+
+func test() {
 	var instance *game.GameState = game.StartGame("kevin", "anna", 100)
 	fmt.Println(fmt.Sprintf("%v", instance))
 
