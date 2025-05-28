@@ -17,15 +17,12 @@ func Home(w http.ResponseWriter, _ *http.Request) {
 		resource("home"),
 	)
 
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	err = template.Execute(w, &homeData{
-		Name:   "Anna",
-		Number: 24,
+    data, _ := newReactPageData(&homeData{
+		Name:   "Michael",
+		Number: 2001,
 	})
+
+	err = template.Execute(w, data)
 
 	if err != nil {
 		fmt.Println(err)

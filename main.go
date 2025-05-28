@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 
 	"llewellyn.dev/liars_dice/game"
@@ -8,11 +9,16 @@ import (
 )
 
 func main() {
-    run()
+	run()
 }
 
 func run() {
-    server.Run()
+	var (
+		isDev = flag.Bool("dev", false, "run in development mode")
+	)
+	flag.Parse()
+
+	server.Run(*isDev)
 }
 
 func test() {
@@ -105,7 +111,7 @@ func test() {
 	}
 	fmt.Println(fmt.Sprintf("%v", instance))
 
-    fmt.Println("---Kevin Challenge---")
+	fmt.Println("---Kevin Challenge---")
 	if err := game.TakeAction(instance, &game.Action{
 		PlayerId: "kevin",
 		Action:   game.PlayerAction_CALL,
