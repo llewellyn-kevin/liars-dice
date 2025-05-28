@@ -7,25 +7,44 @@ import (
 )
 
 type homeData struct {
-	Name   string
-	Number int
+	Name     string
+	Number   int
+	Counters []ReactComponent
+}
+
+type CounterData struct {
+	StartCount int `json:"startCount"`
 }
 
 func Home(w http.ResponseWriter, _ *http.Request) {
 	template, err := template.ParseFiles(
 		layout("app"),
+		partial("react-component"),
 		resource("home"),
 	)
 
-    data, _ := newReactPageData(&homeData{
-		Name:   "Michael",
-		Number: 2001,
+	counters := make([]ReactComponent, 0)
+	for i := 5; i < 15; i += 4 {
+		counter, err := NewReactComponent("counter", CounterData{StartCount: i})
+		if err != nil {
+			panic(err)
+		}
+		counters = append(counters, counter)
+	}
+
+	data, err := NewReactPageData(homeData{
+		Name:     "Dave",
+		Number:   2001,
+		Counters: counters,
 	})
-
-	err = template.Execute(w, data)
-
 	if err != nil {
 		fmt.Println(err)
+		return
+	}
+
+	err = template.Execute(w, data)
+	if err != nil {
+		fmt.Println("template error", err)
 		return
 	}
 }
