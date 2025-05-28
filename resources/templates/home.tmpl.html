@@ -1,6 +1,9 @@
 {{ define "content" }}
 
 <p>Hello {{ .Name }}. Number: {{ .Number }}</p>
-<div id="react-counter"></div>
+
+<div rt-component="counter" data-rt='{"startCount": 5}'></div>
+<div rt-component="counter" data-rt='{"startCount": 8}'></div>
+<div rt-component="counter" data-rt='{"startCount": 11}'></div>
 
 {{ end }}

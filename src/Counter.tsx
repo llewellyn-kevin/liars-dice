@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import { useState } from 'react';
+import setRenderTargets from './reactRenderer';
 
-function Counter() {
-    let [count, setCount] = useState(0);
+type CounterProps = {
+    startCount: number,
+};
+
+const Counter = ({ props }: { props: CounterProps }) => {
+    let [count, setCount] = useState(props.startCount);
 
     let changer = (amount: number) => {
         return () => setCount(count + amount);
@@ -18,8 +22,4 @@ function Counter() {
     </div>;
 };
 
-const domNode = document.getElementById('react-counter');
-if (domNode !== null) {
-    const root = createRoot(domNode);
-    root.render(<Counter />);
-}
+setRenderTargets('counter', Counter);
