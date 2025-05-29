@@ -1,1 +1,4 @@
-import './Counter.tsx'
+import './main.css';
+
+import './Counter.tsx';
+

@@ -15,10 +15,10 @@ const Counter = ({ props }: { props: CounterProps }) => {
     let incr = changer(1);
     let decr = changer(-1);
 
-    return <div>
-        <button onClick={decr}>-</button>
+    return <div className="mb-2 space-x-2">
+        <button onClick={decr} className="px-2 py-1 cursor-pointer border rounded">-</button>
         <span>{count}</span>
-        <button onClick={incr}>+</button>
+        <button onClick={incr} className="px-2 py-1 cursor-pointer border rounded">+</button>
     </div>;
 };
 
