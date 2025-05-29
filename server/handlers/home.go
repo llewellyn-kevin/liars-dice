@@ -12,10 +12,6 @@ type homeData struct {
 	Counters []ReactComponent
 }
 
-type CounterData struct {
-	StartCount int `json:"startCount"`
-}
-
 func Home(w http.ResponseWriter, _ *http.Request) {
 	template, err := template.ParseFiles(
 		layout("app"),
@@ -24,8 +20,8 @@ func Home(w http.ResponseWriter, _ *http.Request) {
 	)
 
 	counters := make([]ReactComponent, 0)
-	for i := 5; i < 15; i += 4 {
-		counter, err := NewReactComponent("counter", CounterData{StartCount: i})
+	for i := int32(5); i < 15; i += 4 {
+		counter, err := NewReactComponent("counter", CounterProps{StartCount: i})
 		if err != nil {
 			panic(err)
 		}

@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import setRenderTargets from './reactRenderer';
-
-type CounterProps = {
-    startCount: number,
-};
+import type { CounterProps } from './frontend_messages';
 
 const Counter = ({ props }: { props: CounterProps }) => {
     let [count, setCount] = useState(props.startCount);

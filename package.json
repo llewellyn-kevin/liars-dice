@@ -8,9 +8,11 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "serve": "nodemon --watch './**/*.go' --signal SIGTERM --exec 'go' run main.go -dev"
+    "serve": "nodemon --watch './**/*.go' --signal SIGTERM --exec 'go' run main.go -dev",
+    "protogen": "pnpm exec protoc --ts_out src --proto_path protos protos/frontend_messages.proto"
   },
   "dependencies": {
+    "@protobuf-ts/plugin": "^2.11.0",
     "@tailwindcss/vite": "^4.1.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

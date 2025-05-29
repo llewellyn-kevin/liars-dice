@@ -1,9 +1,11 @@
 {{ define "content" }}
 
-    <p>Hola {{ .Name }}. Number: {{ .Number }}</p>
+<div class="p-8">
+    <p class="mb-2">Hola {{ .Name }}. Number: {{ .Number }}</p>
 
     {{ range .Counters }}
         {{ template "reactComponent" . }}
     {{ end }}
+</div>
 
 {{ end }}
