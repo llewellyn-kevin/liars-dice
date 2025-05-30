@@ -20,7 +20,7 @@ func Home(w http.ResponseWriter, _ *http.Request) {
 	)
 
 	counters := make([]ReactComponent, 0)
-	for i := int32(5); i < 15; i += 4 {
+	for i := int32(5); i < 6; i += 4 {
 		counter, err := NewReactComponent("counter", CounterProps{StartCount: i})
 		if err != nil {
 			panic(err)

@@ -15,6 +15,7 @@ func Run(isDev bool) {
 	webStack := makeStack(web, logger)
 
 	http.Handle("/home", webStack(http.HandlerFunc(handlers.Home)))
+	http.Handle("/ws/counter", http.HandlerFunc(handlers.WsCounter))
 
 	fmt.Println("Running server on localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
