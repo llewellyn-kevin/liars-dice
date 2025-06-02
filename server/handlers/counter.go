@@ -70,7 +70,7 @@ func UpdateCounter(m map[string]interface{}, clientId string) error {
 	if err != nil {
 		return err
 	}
-    return nil
+	return nil
 }
 
 func WsCounter(w http.ResponseWriter, r *http.Request) {

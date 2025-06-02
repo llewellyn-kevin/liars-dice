@@ -10,7 +10,7 @@ import (
 )
 
 func Run(isDev bool) {
-    vite.SetDevMode(isDev)
+	vite.SetDevMode(isDev)
 
 	webStack := makeStack(web, logger)
 

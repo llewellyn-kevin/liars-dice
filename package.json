@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "serve": "nodemon --watch './**/*.go' --signal SIGTERM --exec 'go' run main.go -dev",
-    "protogen": "pnpm exec protoc --ts_out src --proto_path protos protos/frontend_messages.proto"
+    "protogen": "pnpm exec protoc --ts_out src --proto_path protos protos/frontend_messages.proto",
+    "gofmt": "gofmt -s -w ."
   },
   "dependencies": {
     "@protobuf-ts/plugin": "^2.11.0",

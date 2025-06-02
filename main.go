@@ -9,16 +9,21 @@ import (
 )
 
 func main() {
-	run()
-}
-
-func run() {
 	var (
-		isDev = flag.Bool("dev", false, "run in development mode")
+		isDev  = flag.Bool("dev", false, "run in development mode")
+		isTest = flag.Bool("game", false, "run a test game")
 	)
 	flag.Parse()
 
-	server.Run(*isDev)
+	if *isTest {
+		test()
+	} else {
+		run(*isDev)
+	}
+}
+
+func run(isDev bool) {
+	server.Run(isDev)
 }
 
 func test() {
